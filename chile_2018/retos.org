@@ -1,0 +1,314 @@
+#+REVEAL_ROOT: reveal.js
+#+OPTIONS: num:nil toc:nil reveal_title_slide:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+REVEAL_TRANS: linear
+#+REVEAL_THEME: solarized
+#+REVEAL_PLUGINS: (markdown notes)
+#+TITLE: Implementación de Ciencia de datos en Organizaciones Públicas: Retos y algunas Soluciones
+#+AUTHOR: Adolfo De Unánue Tiscareño
+#+EMAIL: adolfo@uchicago.edu
+
+
+* Implementación de Ciencia de datos en Organizaciones Públicas: Retos y algunas Soluciones
+  Adolfo De Unánue
+
+  Center for Data Science and Public Poicy
+  
+  University of Chicago
+
+*Twitter*: =@nanounanue=
+*Github*:   =Nanounanue=
+
+
+  
+* ¿Dónde encontrar la presentación?
+
+  - =nanounanue/talks/chile_2018=
+  - El repositorio de github contiene el código de la charla
+    e incluye la liga a la Presentación
+
+* Licencia
+
+Este trabajo se encuentra bajo la Licencia 
+ de 
+
+*Creative Commons* 
+
+*Attribution ShareAlike 4.0*
+
+*International License.*
+
+Para ver una copia de esta licencia, Visita:
+[[http://creativecommons.org/license/by-sa/4.0/]]
+
+
+* Advertencia
+
+  - /Opinionado/
+  - Esta plática es un /checklist/ de cosas que deberían de ser obvias
+  - Casi no hablaré de tecnología o de matemáticas
+  - Pero si de la necesidad de estas siempre, pero más en la época actual
+
+* ¿Qué es la ciencia de Datos?
+
+** La definición más corta
+
+  #+BEGIN_QUOTE
+  /"Estadística operacionalizada"/
+  #+End_quote
+
+
+
+** Mi definición
+
+#+BEGIN_QUOTE
+  Aproximación fenomenológica al estudio de sistemas adaptativos
+  complejos (CAS) con el propósito de diseñar y construir productos de
+  datos que soporten la toma de decisiones y habiliten acciones
+  valiosas en el sistema en cuestión.
+#+END_QUOTE
+  
+* Productos de datos
+
+  - Un /producto de datos/ es un sistema (o agente) que contínuamente
+    siente el ambiente, procesa los datos en información y proveé
+    acciones o recomendaciones de acción.
+
+  - Es la /raison d'etre/ del Científico de datos
+
+  - Forma un /feedback loop/
+
+* ¿Qué es un Modelo?
+
+  - Quizá utilicen *modelo* y *algoritmo de ml* de manera intercambiable
+    - e.g. "Hicimos/entrenamos un =RandomForest="
+
+#+BEGIN_QUOTE
+modelo != algoritmo
+#+END_QUOTE
+
+**  Un modelo es:
+#+BEGIN_QUOTE
+  modelo <- /Data lineage/ (incluyendo la limpieza, transformación,
+  extracción, etc) + el algoritmo + los hiperparámetros del algoritmo
+#+End_quote
+
+** O siendo más riguroso
+
+#+BEGIN_QUOTE
+  modelo <- /Data lineage/ (incluyendo la limpieza, transformación,
+  extracción, etc) + *algoritmos* + hiperparámetros + estrategia de
+  /cross-validation/ + métricas + algoritmo de selección de hiperparámetros
+#+END_QUOTE
+
+  - El modelo *no* es el paso final, es el conjunto de pasos. 
+
+  - Un modelo tiene varias instancias en el tiempo 
+    - En DSaPP llamamos a esto /model group/
+
+* Mascotas y Ganado: Dos puntos de Vista
+
+** Mascota
+
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+   [[./images/simona.jpg]]
+
+  - tiene nombre ( e.g. "Simona"), hay una o muy pocas por casa, se le
+    consiente, hay tristeza/duelo si se Muere.  
+
+
+** Ganado
+  - no tienen nombre (e.g."una vaca") , se administran, hay miles,
+    se mandan al matadero.
+
+  - Para el científico de datos, los modelos son /ganado/.
+
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+   [[./images/ganado.jpeg]]
+
+Foto: [[http://www.elcomercio.com/actualidad/ganado-importado-casa-abierta-ecuador.html][Juan Carlos Pérez/ EL COMERCIO.]]
+
+
+
+
+
+* Limitaciones de la Ciencia de Datos
+
+- Patrones de comportamientos pasados
+- Ayuda a tomar decisiones sobre como actuar en un sistema complejo,
+  pero, tradicionalmente /Machine Learning/ sólo responde a preguntas simples
+- Actualmente los modelos carecen de la habilidad de razonar acerca de
+  las entidades y de las relaciones entre esas entidades
+
+
+* AI \in IA
+
+  - Aumento de inteligencia
+  - Inteligencia artificial
+  
+
+* Un ejercicio de visualización
+
+  - Piensa en tu organización 
+
+* ¿Qué es una organización?
+  - *TOGAF* define a una empresa como:
+
+  #+Begin_quote
+  Empresa es cualquier colección de organizaciones que tiene un conjunto común de metas
+  #+END_QUOTE
+
+
+* Un concepto interesante: Variedad
+
+  /Ley de Ashby/: El controlador debe tener al menos la misma variedad que lo controlado
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 600px :height 400px
+#+ATTR_LATEX: :height 150px :width 200px 
+[[./images/requisite_variety.jpg]]
+
+Fuente: Stafford Beer
+
+#+REVEAL: split
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+  [[./images/variedad.png]]
+
+[[http://www.athanassoulas.com/the-law-of-requisite-variety/][Fuente]]
+
+* Otro concepto: /Feedback loop/
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+  [[./images/feedback_loop.gif]]
+
+*Fuente*: Sterman, J.D. Business Dynamics: Systems Thinking and Modeling for a Complex World. McGraw-Hill. Boston. 2000
+
+
+* ¿Cuál es el propósito de la Organización?
+
+#+BEGIN_QUOTE
+El propósito del sistema es lo que hace.
+#+END_QUOTE
+
+Stafford Beer
+
+* La situación
+
+  - El producto de datos es un componente transversal a la arquitectura de la organización.
+  - Además, las acciones, tomadas o recomendadas, impactará en varias áreas de la organizaciónorganisation.
+    - /feedback loop/
+  
+* Problema: Evolución
+
+  - Las organizaciones se crearon originalmente para resolver un problema
+  - Sus sensores, sistemas y datos fueron diseñandos desde el punto de vista operacional
+  - Nadie estaba pensando en el futuro
+  - Es decir la organización tiene /historia/
+
+* Problema: Tecnología
+
+  - Soportar a los procesos organizacionales
+  - Habilitar la evolución de la organización
+  - Ayudar a controlar la variabilidad
+  - Contrario a la creencia popular, no cambia tan rápido
+  - Es considerada como segunda categoría en muchas culturas
+  - Su rol entonces es *no* innovar, sino mantener el funcionamiento actual
+  
+* Problema: Procesos
+
+* Problema: Implementación
+
+  - Muchos siguen pensando en el estudio estadístico
+  - ... o el estudio econométrico
+  - /ceteris paribus/
+  - ¿Las fuentes de datos son estables?
+  - ¿Cómo comunicar los cambios en los generadores de datos?
+  - ¿Se puede cerrar el /loop/?
+  - ¿Qué implicaciones tendrá?
+  - ¿Dónde se conectará?
+  - ¿Quién lo mantendrá?
+  - ¿Cómo afectará a los procesos?
+
+* Problema: Humanos
+
+  - Las trampas cognitivas son ampliamente conocidas
+  - Pensamiento a corto plazo
+  - Dificultad para pensar en probabilidades
+  - Pensar linealmente en causa y efecto: Ignorar /feedbacks/ and /delays/
+  - Inercia / Resistencia al cambio
+  - Menospreciar la evidencia que no favorece su punto de vista
+  
+
+* Problema: El modelador
+
+  - Fetiche matemático
+  - Fetiche tecnológico
+  - No pensar en el servicios, pensar en /trends/
+  - No considerar el sistema
+  - No considerar al humano final
+
+* Otros problemas
+
+  - /bias/
+  - interpretabilidad
+  - (des) confianza
+
+
+* Trampas conocidas
+
+  - /dashboard/ y el tiempo Real
+  - el modelo único
+  - el "piloto"
+  - ignorar el sistema
+  - ignorar las impactos
+  
+* ¿Cómo resolverlos?
+
+  - Sistemas
+  - Visión /en large/
+  - Estratégica
+ 
+* A manera de Conclusión
+
+- Los *productos de datos*:
+  - Absorben variedad de entrada
+  - Amplifican la variedad de salida
+  - Bien construidos, aumentan la adaptabilidad de la organización
+  - Aumentan la /viabilidad/
+   
+* Ciencia de datos para estrategia
+
+* ¿Preguntas?
+
+* Conectando...
+
+Data Science for Social Good Summer Fellowship
+
+http://dssg.uchicago.edu
+
+Center for Data Science & Public Policy
+
+http://dsapp.uchicago.edu
+
+Code:
+
+http://github.com/dssg
+
+
+Twitter: @nanounanue
+Github:   nanounanue
+
+
+
+

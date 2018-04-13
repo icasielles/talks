@@ -1,0 +1,431 @@
+#+REVEAL_ROOT: reveal.js
+#+OPTIONS: num:nil toc:nil reveal_title_slide:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+REVEAL_TRANS: linear
+#+REVEAL_THEME: solarized
+#+REVEAL_PLUGINS: (markdown notes)
+#+TITLE: Ciencia de datos: Algunos casos prácticos
+#+description: Describiendo algunas situaciones comunes de proyectos de Ciencia de datos
+#+AUTHOR: Adolfo De Unánue Tiscareño
+#+EMAIL: adolfo@uchicago.edu
+#+DATE: 12 de abril de 2018
+
+* Ciencia de datos: Algunos casos prácticos
+  Adolfo De Unánue
+
+  Center for Data Science and Public Poicy
+  
+  University of Chicago
+
+*Twitter*: =@nanounanue=
+*Github*:   =Nanounanue=
+
+  
+* ¿Dónde encontrar la presentación?
+
+  - =nanounanue/talks/chile_2018=
+  - El repositorio de github contiene el código de la charla
+    e incluye la liga a la Presentación
+
+* Licencia
+
+Este trabajo se encuentra bajo la Licencia 
+ de 
+
+*Creative Commons* 
+
+*Attribution ShareAlike 4.0*
+
+*International License.*
+
+Para ver una copia de esta licencia, Visita:
+[[http://creativecommons.org/license/by-sa/4.0/]]
+
+* ¿Qué es la ciencia de Datos?
+
+** La definición más corta
+
+  #+BEGIN_QUOTE
+  /"Estadística operacionalizada"/
+  #+End_quote
+
+
+
+** Mi definición
+
+#+BEGIN_QUOTE
+  Aproximación fenomenológica al estudio de sistemas adaptativos
+  complejos (CAS) con el propósito de diseñar y construir productos de
+  datos que soporten la toma de decisiones y habiliten acciones
+  valiosas en el sistema en cuestión.
+#+END_QUOTE
+  
+* Productos de datos
+
+  - Un /producto de datos/ es un sistema (o agente) que contínuamente
+    siente el ambiente, procesa los datos en información y proveé
+    acciones o recomendaciones de acción.
+
+  - Es la /raison d'etre/ del Científico de datos
+
+  - Forma un /feedback loop/
+
+* ¿Qué es un Modelo?
+
+  - Quizá utilicen *modelo* y *algoritmo de ml* de manera intercambiable
+    - e.g. "Hicimos/entrenamos un =RandomForest="
+
+#+BEGIN_QUOTE
+modelo != algoritmo
+#+END_QUOTE
+
+**  Un modelo es:
+#+BEGIN_QUOTE
+  modelo <- /Data lineage/ (incluyendo la limpieza, transformación,
+  extracción, etc) + el algoritmo + los hiperparámetros del algoritmo
+#+End_quote
+
+** O siendo más riguroso
+
+#+BEGIN_QUOTE
+  modelo <- /Data lineage/ (incluyendo la limpieza, transformación,
+  extracción, etc) + *algoritmos* + hiperparámetros + estrategia de
+  /cross-validation/ + métricas + algoritmo de selección de hiperparámetros
+#+END_QUOTE
+
+  - El modelo *no* es el paso final, es el conjunto de pasos. 
+
+  - Un modelo tiene varias instancias en el tiempo 
+    - En DSaPP llamamos a esto /model group/
+
+* Mascotas y Ganado: Dos puntos de Vista
+
+** Mascota
+
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+   [[./images/simona.jpg]]
+
+  - tiene nombre ( e.g. "Simona"), hay una o muy pocas por casa, se le
+    consiente, hay tristeza/duelo si se Muere.  
+
+
+** Ganado
+  - no tienen nombre (e.g."una vaca") , se administran, hay miles,
+    se mandan al matadero.
+
+  - Para el científico de datos, los modelos son /ganado/.
+
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 400px :height 300px
+#+ATTR_LATEX: :height 150px :width 200px 
+   [[./images/ganado.jpeg]]
+
+Foto: [[http://www.elcomercio.com/actualidad/ganado-importado-casa-abierta-ecuador.html][Juan Carlos Pérez/ EL COMERCIO.]]
+
+
+
+
+* Tres casos en Paralelo
+
+  - Identificación de actividad fraudulenta 
+    - /fraude/
+  - Sistema de Alerta/Intervención temprana 
+    - /EIS/
+  - Priorización de Inspecciones
+    - /inspecciones/
+
+
+* Características de los problemas                 :general:
+  - Supervisados
+  - Componente temporal explícita
+  - Multientidad
+  - Multidimensionales
+  - Irregulares
+  - Restringidos por capacidades operativas
+  - Adversariales
+
+* Definir el Problema
+
+** Fraude
+   - Identificar si la transacción es /fraudulenta/
+   - Identificar si la tarjeta ha sido *Comprometida*
+   - Identificar el punto de compromiso / punto de Fraude
+
+** EIS
+   - ¿Qué $k$ entidades van a tener una evento adversa o negativa en un tiempo futuro $\Delta t$?
+
+** Inspecciones
+   - ¿Qué $k$ entidades debo de inspeccionar en el siguiente $\Delta t$ para encontrar eventos Adversos?
+
+* Las "Y"
+
+  Si, en plural
+
+** Las "Y": EIS
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 600px :height 400px
+#+ATTR_LATEX: :height 150px :width 200px 
+[[./images/outcomes-eis.png]]
+
+Fuente: [[https://dssg.github.io/dirtyduck/][Dirty duck tutorial]]
+
+** Las "Y" Inspección
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 600px :height 400px
+#+ATTR_LATEX: :height 150px :width 200px 
+[[./images/outcomes-eis.png]]
+
+Fuente: [[https://dssg.github.io/dirtyduck/][Dirty duck tutorial]]
+
+* ¿Qué Acciones?
+
+** Fraude
+   - En el planteamiento más fácil declinar/aceptar la transacción. 
+     En otras configuraciones, puede ser agregar más acciones dependiendo de la calificación del modelo.
+
+** EIS
+   - Acciones relacionadas con /apoyo/ a las entidades sugeridas por el modelo para que *no* sufran el evento adverso
+   - e.g. Apoyo psicológico, terapia, entrenamiento, capacitación, etc
+   
+** Inspecciones
+   - Inspeccionar a la entidades identificadas por el modelo.
+   
+* ¿Hay datos?                                      
+
+  - Si quieres iniciar una discusión en una organización, en una reunión general pregunta por los datos.
+  - Qué interesa:
+    - Granularidad: ¿Individual?¿Grupo?¿Región?¿Mensual?¿Anual?
+    - Rango temporal: Unos días, meses, años
+    - Frecuencia: Diario, Mensual, Anual, Nunca, Una sola vez
+    - Riqueza
+    - Consistencia
+#+REVEAL: split
+  - Acceso, privacidad
+  - /Ownership/
+  - ¿Hay procesos para extraerlos? ¿Cuál es el esfuerzo?
+  - ¿En qué formato?
+  - ¿Cómo están almacenados?
+  - ¿Existe documentación?
+
+  Consultar: [[http://dsapp.uchicago.edu/resources/datamaturity/][DsaPP Data Maturity Framework]]
+   
+  
+* Los datos ideales                                
+
+  - Una vez que tienes el problema definido y las acciones, define tus datos ideales
+    - e.g. (/fraude/) tarjetahabiente (sexo, edad, salario, dirección),
+      transacción (tipo de tarjeta, monto, fecha), negocio/ATM (giro, 
+      detalle de la compra, localización)
+    - e.g. (/EIS/) entidad (sexo, estatus, relaciones con otras
+      entidades), eventos (localización, fecha, tipo de evento,
+      entidades primarias y secundarias involucradas)
+
+* La abstracción                                   
+   
+  El problema involucra a /entidades/ primarias (y en algunos casos
+  secundarias) que interactúan mediante /eventos/, los cuales por
+  definición suceden en un lugar y a un tiempo.
+
+* La abstracción: /pipeline 1era parte/                       
+
+  =raw= -> =cleaned= -> =semantic=
+  
+  - En *BD* esquemas, en *FS* directorios u objetos.
+  - =VARCHAR= en la carga
+  - *ELT* en lugar de *ETL*
+
+* ¿Qué datos?
+
+
+** Fraude
+   - Transaccionales, no había información de los catálogos (no
+    documantación), no había información de los tarjetahabientes (otra
+    área), etiquetas de fraude con mucho retraso y no hacían /match/,
+    no había procesos automatizados para la extracción, no había una
+     base de datos central. 
+
+** EIS
+   - No hay acceso a las bases de datos de los sistemas -> extracción
+     manual, no se guardan tiempos o lugares, no hay /links/
+     confiables entre las fuentes de datos, proceso manual de
+     recolección de una única vez y no confiable (cambio de nombres de
+     columnas, orden cambiado, /encodings/) inconsistencias en los
+     Formatos. No se pueden relacionar entidades que participaron en
+     un evento. Inconsistencias en la granularidad temporal. Sin
+     registro de locación.
+
+** Inspecciones
+   - La entidad interesada no controla los datos que necesita. Los
+     involucrados no entienden el proyecto o no les interesa. Las
+     etiquetas son sólo de aquello que decidieron inspeccionar con
+     anterioridad. Diferentes sistemas de almacenamiento, algunos con
+     licencia y formatos no estándar.
+
+
+* Procesar los datos                               
+
+  - Los datos y su significado/definición son contextuales al área que los
+    genera, y existen por lo tanto reglas para limpiarlos que
+    son/existen en esa área.
+  - ¿Cómo limpiarlos?¿Con qué reglas si ya están fuera de su contexto?
+    ¿Qué hacer si las reglas se contradicen?¿Qué hacer si las
+    definiciones se Contradicen?
+
+#+REVEAL: split
+
+  - Deduplicación, /Record linkage/
+    - Tendremos un proyecto de datos, dentro de un proyecto de datos
+    - Primer ejemplo de /Stacking/
+
+#+BEGIN_QUOTE
+  Esta etapa se va a hacer varias veces: 
+  *Preserva la fuente intacta, guarda un histórico, haz funciones*
+#+END_QUOTE
+
+* /Features/
+
+  - /feature engineering/ es una de las partes más importantes del proceso
+
+  - ¡Hay que tener cuidado con traer información del futuro! (/Leaking/)
+
+** Sabia virtud de conocer el Tiempo
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 600px :height 400px
+#+ATTR_LATEX: :height 150px :width 200px 
+[[./images/rolling-origin.png]]
+
+
+Fuente: [[https://dssg.github.io/dirtyduck/][Dirty duck tutorial]]
+
+** Temporal cross-Validation
+
+#+ATTR_ORG: :width 600px :height 600px
+#+ATTR_HTML: :width 600px :height 400px
+#+ATTR_LATEX: :height 150px :width 200px 
+[[./images/timechop_withoutrows.png]]
+
+
+Fuente: [[https://dssg.github.io/dirtyduck/][Dirty duck tutorial]]
+
+
+* Ejemplos de /features/
+** transformaciones de las variables
+      - e.g. =fecha= -> =año=, =mes=, =dia=, =hora=, =fin de semana=,
+      =festivo=, =mañana/tarde/noche=, etc.
+      
+** contextuales 
+      - percentil de la variable, encima o abajo de la media, distancia
+        a la media, etc.
+
+** temporales
+      - valores anteriores, derivadas (diferencias) e integrales(conteos,
+        sumas) en varios rangos, características de la serie de tiempo,
+        percentil en un tiempo es específico, aproximación de onda, FFT, etc.
+
+** espaciales
+      - utilización de radios, utilización de regiones preestablecidas,
+        relación respecto a un lugar en específico, etc.
+
+* La abstracción: /pipeline 2da parte/                       
+
+  =raw= -> =cleaned= -> =semantic= -> =labels= -> =features=
+                                           
+
+* Producto de datos 
+
+  - El paso siguiente en el /pipeline/ es entrenar varios algoritmos
+  - Hay que explorar varios hiperparámetros
+  - En varios bloques temporales de datos (entrenamiento)
+  - y probar contra un bloque de prueba (validación)
+
+* Seleccionar el modelo entrenado
+
+  - Probablemente haya miles de modelos en este punto
+  - ¿Qué quieres usar para seleccionar?
+  - ¿La métrica? ¿En que momento del tiempo?
+  - ¿Estabilidad?
+  - ¿Simpleza?
+  
+
+* Gobierno
+  
+  - Algunos piensan en gobierno de datos
+  - O en control de código
+  - Pero no es suficiente, debes de gobernar el linaje, los metadatos,
+    la infraestructura, los modelos 
+  - Por que quieres tener ...
+
+* Reproducibilidad
+
+  - Y esto incluye poder reproducir: 
+  - Resultados,  ¿Training datasets? ¿Trials? ¿/Features/? ¿Modelos? ¿Infraestructura?
+  - ¿Cómo la evolución del producto de datos es almacenada en un
+    formato que sea resilente a la pérdida de información?
+
+* La abstracción: /pipeline 3era parte/                       
+
+  =raw= -> =cleaned= -> =semantic= -> =labels= -> =features= ->
+  =models= -> =Model=
+
+
+* Otros puntos a considerar
+
+** Procesos
+
+  - ¿Ya pensaste en como obtener los datos de manera contínua?
+  - Recuerda que inclusive tú eres un /adversario/ cuando el producto
+    llega a producción
+
+** Métricas
+
+  - /Off line/
+  - /On line/
+  - /businness metrics/
+  - Del proceso
+    - e.g. Fraude fecha /contable/ contra Fraude fecha /real/
+
+** Consumo
+
+  - ¿La organización cuenta con las capacidades para adoptar el producto?
+  - ¿El usuario final entiende? ¿Participó en el diseño?
+  - ¿Cómo es la interacción del usuario y el producto? 
+  - ¿El producto está integrado al proceso del usuario?
+  - ¿Cómo despliegas en producción el modelo?
+
+* Limitaciones de la Ciencia de Datos
+
+- Patrones de comportamientos pasados
+- Ayuda a tomar decisiones sobre como actuar en un sistema complejo,
+  pero, tradicionalmente /Machine Learning/ sólo responde a preguntas simples
+- Actualmente los modelos carecen de la habilidad de razonar acerca de
+  las entidades y de las relaciones entre esas entidades
+  
+* Ciencia de datos para estrategia
+
+* ¿Preguntas?
+
+* Conectando...
+
+Data Science for Social Good Summer Fellowship
+
+http://dssg.uchicago.edu
+
+Center for Data Science & Public Policy
+
+http://dsapp.uchicago.edu
+
+Code:
+
+http://github.com/dssg
+
+
+Twitter: @nanounanue
+Github:   nanounanue
+
