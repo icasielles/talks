@@ -4,6 +4,7 @@
 #+REVEAL_TRANS: linear
 #+REVEAL_THEME: solarized
 #+REVEAL_PLUGINS: (markdown notes)
+#+EXPORT_FILE_NAME: ../docs/casos
 #+TITLE: Ciencia de datos: Algunos casos prácticos
 #+description: Describiendo algunas situaciones comunes de proyectos de Ciencia de datos
 #+AUTHOR: Adolfo De Unánue Tiscareño

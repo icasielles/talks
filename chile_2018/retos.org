@@ -4,6 +4,7 @@
 #+REVEAL_TRANS: linear
 #+REVEAL_THEME: solarized
 #+REVEAL_PLUGINS: (markdown notes)
+#+EXPORT_FILE_NAME: ../docs/retos
 #+TITLE: Implementación de Ciencia de datos en Organizaciones Públicas: Retos y algunas Soluciones
 #+AUTHOR: Adolfo De Unánue Tiscareño
 #+EMAIL: adolfo@uchicago.edu

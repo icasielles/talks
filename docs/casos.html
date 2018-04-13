@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Ciencia de datos: Algunos casos prácticos</title>
+<meta name="author" content="(Adolfo De Unánue Tiscareño)"/>
+<meta name="description" content="Describiendo algunas situaciones comunes de proyectos de Ciencia de datos"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<section id="slide-orge4f9b24">
+<h2 id="orge4f9b24">Ciencia de datos: Algunos casos prácticos</h2>
+<p>
+Adolfo De Unánue
+</p>
+
+<p>
+Center for Data Science and Public Poicy
+</p>
+
+<p>
+University of Chicago
+</p>
+
+<p>
+<b>Twitter</b>: <code>@nanounanue</code>
+<b>Github</b>:   <code>Nanounanue</code>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgac75f5a">
+<h2 id="orgac75f5a">¿Dónde encontrar la presentación?</h2>
+<ul>
+<li><code>nanounanue/talks/chile_2018</code></li>
+<li>El repositorio de github contiene el código de la charla
+e incluye la liga a la Presentación</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org5f25abc">
+<h2 id="org5f25abc">Licencia</h2>
+<p>
+Este trabajo se encuentra bajo la Licencia 
+ de 
+</p>
+
+<p>
+<b>Creative Commons</b> 
+</p>
+
+<p>
+<b>Attribution ShareAlike 4.0</b>
+</p>
+
+<p>
+<b>International License.</b>
+</p>
+
+<p>
+Para ver una copia de esta licencia, Visita:
+<a href="http://creativecommons.org/license/by-sa/4.0/">http://creativecommons.org/license/by-sa/4.0/</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgff31acf">
+<h2 id="orgff31acf">¿Qué es la ciencia de Datos?</h2>
+<div class="outline-text-2" id="text-orgff31acf">
+</div>
+</section>
+<section id="slide-org9a3bf54">
+<h3 id="org9a3bf54">La definición más corta</h3>
+<blockquote nil>
+<p>
+<i>"Estadística operacionalizada"</i>
+</p>
+</blockquote>
+
+
+
+</section>
+<section id="slide-orgd09af25">
+<h3 id="orgd09af25">Mi definición</h3>
+<blockquote nil>
+<p>
+Aproximación fenomenológica al estudio de sistemas adaptativos
+complejos (CAS) con el propósito de diseñar y construir productos de
+datos que soporten la toma de decisiones y habiliten acciones
+valiosas en el sistema en cuestión.
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org845cf46">
+<h2 id="org845cf46">Productos de datos</h2>
+<ul>
+<li>Un <i>producto de datos</i> es un sistema (o agente) que contínuamente
+siente el ambiente, procesa los datos en información y proveé
+acciones o recomendaciones de acción.</li>
+
+<li>Es la <i>raison d'etre</i> del Científico de datos</li>
+
+<li>Forma un <i>feedback loop</i></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org963e226">
+<h2 id="org963e226">¿Qué es un Modelo?</h2>
+<ul>
+<li>Quizá utilicen <b>modelo</b> y <b>algoritmo de ml</b> de manera intercambiable
+<ul>
+<li>e.g. "Hicimos/entrenamos un <code>RandomForest</code>"</li>
+
+</ul></li>
+
+</ul>
+
+<blockquote nil>
+<p>
+modelo != algoritmo
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org8a3f2b6">
+<h3 id="org8a3f2b6">Un modelo es:</h3>
+<blockquote nil>
+<p>
+modelo &lt;- <i>Data lineage</i> (incluyendo la limpieza, transformación,
+extracción, etc) + el algoritmo + los hiperparámetros del algoritmo
+</p>
+</blockquote>
+
+</section>
+<section id="slide-orgc3a7280">
+<h3 id="orgc3a7280">O siendo más riguroso</h3>
+<blockquote nil>
+<p>
+modelo &lt;- <i>Data lineage</i> (incluyendo la limpieza, transformación,
+extracción, etc) + <b>algoritmos</b> + hiperparámetros + estrategia de
+<i>cross-validation</i> + métricas + algoritmo de selección de hiperparámetros
+</p>
+</blockquote>
+
+<ul>
+<li>El modelo <b>no</b> es el paso final, es el conjunto de pasos.</li>
+
+<li>Un modelo tiene varias instancias en el tiempo 
+<ul>
+<li>En DSaPP llamamos a esto <i>model group</i></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org3fcc725">
+<h2 id="org3fcc725">Mascotas y Ganado: Dos puntos de Vista</h2>
+<div class="outline-text-2" id="text-org3fcc725">
+</div>
+</section>
+<section id="slide-orgdc38b98">
+<h3 id="orgdc38b98">Mascota</h3>
+
+<div class="figure">
+<p><img src="./images/simona.jpg" alt="simona.jpg" width="400px" height="300px" />
+</p>
+</div>
+
+<ul>
+<li>tiene nombre ( e.g. "Simona"), hay una o muy pocas por casa, se le
+consiente, hay tristeza/duelo si se Muere.</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgb2e1b0a">
+<h3 id="orgb2e1b0a">Ganado</h3>
+<ul>
+<li>no tienen nombre (e.g."una vaca") , se administran, hay miles,
+se mandan al matadero.</li>
+
+<li>Para el científico de datos, los modelos son <i>ganado</i>.</li>
+
+</ul>
+
+
+
+<div class="figure">
+<p><img src="./images/ganado.jpeg" alt="ganado.jpeg" width="400px" height="300px" />
+</p>
+</div>
+
+<p>
+Foto: <a href="http://www.elcomercio.com/actualidad/ganado-importado-casa-abierta-ecuador.html">Juan Carlos Pérez/ EL COMERCIO.</a>
+</p>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7d4df85">
+<h2 id="org7d4df85">Tres casos en Paralelo</h2>
+<ul>
+<li>Identificación de actividad fraudulenta 
+<ul>
+<li><i>fraude</i></li>
+
+</ul></li>
+<li>Sistema de Alerta/Intervención temprana 
+<ul>
+<li><i>EIS</i></li>
+
+</ul></li>
+<li>Priorización de Inspecciones
+<ul>
+<li><i>inspecciones</i></li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf97be06">
+<h2 id="orgf97be06">Características de los problemas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="general">general</span></span></h2>
+<ul>
+<li>Supervisados</li>
+<li>Componente temporal explícita</li>
+<li>Multientidad</li>
+<li>Multidimensionales</li>
+<li>Irregulares</li>
+<li>Restringidos por capacidades operativas</li>
+<li>Adversariales</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf49dbcd">
+<h2 id="orgf49dbcd">Definir el Problema</h2>
+<div class="outline-text-2" id="text-orgf49dbcd">
+</div>
+</section>
+<section id="slide-orgd8ac1d5">
+<h3 id="orgd8ac1d5">Fraude</h3>
+<ul>
+<li>Identificar si la transacción es <i>fraudulenta</i></li>
+<li>Identificar si la tarjeta ha sido <b>Comprometida</b></li>
+<li>Identificar el punto de compromiso / punto de Fraude</li>
+
+</ul>
+
+</section>
+<section id="slide-org9af7edb">
+<h3 id="org9af7edb">EIS</h3>
+<ul>
+<li>¿Qué \(k\) entidades van a tener una evento adversa o negativa en un tiempo futuro \(\Delta t\)?</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf9b8816">
+<h3 id="orgf9b8816">Inspecciones</h3>
+<ul>
+<li>¿Qué \(k\) entidades debo de inspeccionar en el siguiente \(\Delta t\) para encontrar eventos Adversos?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org5fa0a16">
+<h2 id="org5fa0a16">Las "Y"</h2>
+<p>
+Si, en plural
+</p>
+
+</section>
+<section id="slide-org73cb504">
+<h3 id="org73cb504">Las "Y": EIS</h3>
+
+<div class="figure">
+<p><img src="./images/outcomes-eis.png" alt="outcomes-eis.png" width="600px" height="400px" />
+</p>
+</div>
+
+<p>
+Fuente: <a href="https://dssg.github.io/dirtyduck/">Dirty duck tutorial</a>
+</p>
+
+</section>
+<section id="slide-org84979d6">
+<h3 id="org84979d6">Las "Y" Inspección</h3>
+
+<div class="figure">
+<p><img src="./images/outcomes-eis.png" alt="outcomes-eis.png" width="600px" height="400px" />
+</p>
+</div>
+
+<p>
+Fuente: <a href="https://dssg.github.io/dirtyduck/">Dirty duck tutorial</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org1fa53ef">
+<h2 id="org1fa53ef">¿Qué Acciones?</h2>
+<div class="outline-text-2" id="text-org1fa53ef">
+</div>
+</section>
+<section id="slide-orgc3bfe66">
+<h3 id="orgc3bfe66">Fraude</h3>
+<ul>
+<li>En el planteamiento más fácil declinar/aceptar la transacción. 
+En otras configuraciones, puede ser agregar más acciones dependiendo de la calificación del modelo.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfe5605c">
+<h3 id="orgfe5605c">EIS</h3>
+<ul>
+<li>Acciones relacionadas con <i>apoyo</i> a las entidades sugeridas por el modelo para que <b>no</b> sufran el evento adverso</li>
+<li>e.g. Apoyo psicológico, terapia, entrenamiento, capacitación, etc</li>
+
+</ul>
+
+</section>
+<section id="slide-org5dcf943">
+<h3 id="org5dcf943">Inspecciones</h3>
+<ul>
+<li>Inspeccionar a la entidades identificadas por el modelo.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd2aac9c">
+<h2 id="orgd2aac9c">¿Hay datos?</h2>
+<ul>
+<li>Si quieres iniciar una discusión en una organización, en una reunión general pregunta por los datos.</li>
+<li>Qué interesa:
+<ul>
+<li>Granularidad: ¿Individual?¿Grupo?¿Región?¿Mensual?¿Anual?</li>
+<li>Rango temporal: Unos días, meses, años</li>
+<li>Frecuencia: Diario, Mensual, Anual, Nunca, Una sola vez</li>
+<li>Riqueza</li>
+<li>Consistencia</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section >
+<ul>
+<li>Acceso, privacidad</li>
+<li><i>Ownership</i></li>
+<li>¿Hay procesos para extraerlos? ¿Cuál es el esfuerzo?</li>
+<li>¿En qué formato?</li>
+<li>¿Cómo están almacenados?</li>
+<li>¿Existe documentación?</li>
+
+</ul>
+
+<p>
+Consultar: <a href="http://dsapp.uchicago.edu/resources/datamaturity/">DsaPP Data Maturity Framework</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org3df751c">
+<h2 id="org3df751c">Los datos ideales</h2>
+<ul>
+<li>Una vez que tienes el problema definido y las acciones, define tus datos ideales
+<ul>
+<li>e.g. (<i>fraude</i>) tarjetahabiente (sexo, edad, salario, dirección),
+transacción (tipo de tarjeta, monto, fecha), negocio/ATM (giro, 
+detalle de la compra, localización)</li>
+<li>e.g. (<i>EIS</i>) entidad (sexo, estatus, relaciones con otras
+entidades), eventos (localización, fecha, tipo de evento,
+entidades primarias y secundarias involucradas)</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org3ad00e8">
+<h2 id="org3ad00e8">La abstracción</h2>
+<p>
+El problema involucra a <i>entidades</i> primarias (y en algunos casos
+secundarias) que interactúan mediante <i>eventos</i>, los cuales por
+definición suceden en un lugar y a un tiempo.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org5a82ff8">
+<h2 id="org5a82ff8">La abstracción: <i>pipeline 1era parte</i></h2>
+<p>
+<code>raw</code> -&gt; <code>cleaned</code> -&gt; <code>semantic</code>
+</p>
+
+<ul>
+<li>En <b>BD</b> esquemas, en <b>FS</b> directorios u objetos.</li>
+<li><code>VARCHAR</code> en la carga</li>
+<li><b>ELT</b> en lugar de <b>ETL</b></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2e94b8e">
+<h2 id="org2e94b8e">¿Qué datos?</h2>
+<div class="outline-text-2" id="text-org2e94b8e">
+</div>
+</section>
+<section id="slide-org13b28cb">
+<h3 id="org13b28cb">Fraude</h3>
+<ul>
+<li>Transaccionales, no había información de los catálogos (no
+documantación), no había información de los tarjetahabientes (otra
+área), etiquetas de fraude con mucho retraso y no hacían <i>match</i>,
+no había procesos automatizados para la extracción, no había una
+ base de datos central.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgaf1d1c3">
+<h3 id="orgaf1d1c3">EIS</h3>
+<ul>
+<li>No hay acceso a las bases de datos de los sistemas -&gt; extracción
+manual, no se guardan tiempos o lugares, no hay <i>links</i>
+confiables entre las fuentes de datos, proceso manual de
+recolección de una única vez y no confiable (cambio de nombres de
+columnas, orden cambiado, <i>encodings</i>) inconsistencias en los
+Formatos. No se pueden relacionar entidades que participaron en
+un evento. Inconsistencias en la granularidad temporal. Sin
+registro de locación.</li>
+
+</ul>
+
+</section>
+<section id="slide-org1a5624c">
+<h3 id="org1a5624c">Inspecciones</h3>
+<ul>
+<li>La entidad interesada no controla los datos que necesita. Los
+involucrados no entienden el proyecto o no les interesa. Las
+etiquetas son sólo de aquello que decidieron inspeccionar con
+anterioridad. Diferentes sistemas de almacenamiento, algunos con
+licencia y formatos no estándar.</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgfedf871">
+<h2 id="orgfedf871">Procesar los datos</h2>
+<ul>
+<li>Los datos y su significado/definición son contextuales al área que los
+genera, y existen por lo tanto reglas para limpiarlos que
+son/existen en esa área.</li>
+<li>¿Cómo limpiarlos?¿Con qué reglas si ya están fuera de su contexto?
+¿Qué hacer si las reglas se contradicen?¿Qué hacer si las
+definiciones se Contradicen?</li>
+
+</ul>
+
+</section>
+<section >
+
+<ul>
+<li>Deduplicación, <i>Record linkage</i>
+<ul>
+<li>Tendremos un proyecto de datos, dentro de un proyecto de datos</li>
+<li>Primer ejemplo de <i>Stacking</i></li>
+
+</ul></li>
+
+</ul>
+
+<blockquote nil>
+<p>
+Esta etapa se va a hacer varias veces: 
+<b>Preserva la fuente intacta, guarda un histórico, haz funciones</b>
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org7749795">
+<h2 id="org7749795"><i>Features</i></h2>
+<ul>
+<li><i>feature engineering</i> es una de las partes más importantes del proceso</li>
+
+<li>¡Hay que tener cuidado con traer información del futuro! (<i>Leaking</i>)</li>
+
+</ul>
+
+</section>
+<section id="slide-org51a53a1">
+<h3 id="org51a53a1">Sabia virtud de conocer el Tiempo</h3>
+
+<div class="figure">
+<p><img src="./images/rolling-origin.png" alt="rolling-origin.png" width="600px" height="400px" />
+</p>
+</div>
+
+
+<p>
+Fuente: <a href="https://dssg.github.io/dirtyduck/">Dirty duck tutorial</a>
+</p>
+
+</section>
+<section id="slide-orgd633d50">
+<h3 id="orgd633d50">Temporal cross-Validation</h3>
+
+<div class="figure">
+<p><img src="./images/timechop_withoutrows.png" alt="timechop_withoutrows.png" width="600px" height="400px" />
+</p>
+</div>
+
+
+<p>
+Fuente: <a href="https://dssg.github.io/dirtyduck/">Dirty duck tutorial</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5dc9d48">
+<h2 id="org5dc9d48">Ejemplos de <i>features</i></h2>
+<div class="outline-text-2" id="text-org5dc9d48">
+</div>
+</section>
+<section id="slide-org5bc7d12">
+<h3 id="org5bc7d12">transformaciones de las variables</h3>
+<ul>
+<li>e.g. <code>fecha</code> -&gt; <code>año</code>, <code>mes</code>, <code>dia</code>, <code>hora</code>, <code>fin de semana</code>,</li>
+
+</ul>
+<p>
+<code>festivo</code>, <code>mañana/tarde/noche</code>, etc.
+</p>
+
+</section>
+<section id="slide-org906291c">
+<h3 id="org906291c">contextuales</h3>
+<ul>
+<li>percentil de la variable, encima o abajo de la media, distancia
+a la media, etc.</li>
+
+</ul>
+
+</section>
+<section id="slide-org69bba1e">
+<h3 id="org69bba1e">temporales</h3>
+<ul>
+<li>valores anteriores, derivadas (diferencias) e integrales(conteos,
+sumas) en varios rangos, características de la serie de tiempo,
+percentil en un tiempo es específico, aproximación de onda, FFT, etc.</li>
+
+</ul>
+
+</section>
+<section id="slide-org3f50deb">
+<h3 id="org3f50deb">espaciales</h3>
+<ul>
+<li>utilización de radios, utilización de regiones preestablecidas,
+relación respecto a un lugar en específico, etc.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc8f3014">
+<h2 id="orgc8f3014">La abstracción: <i>pipeline 2da parte</i></h2>
+<p>
+<code>raw</code> -&gt; <code>cleaned</code> -&gt; <code>semantic</code> -&gt; <code>labels</code> -&gt; <code>features</code>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org376a5aa">
+<h2 id="org376a5aa">Producto de datos</h2>
+<ul>
+<li>El paso siguiente en el <i>pipeline</i> es entrenar varios algoritmos</li>
+<li>Hay que explorar varios hiperparámetros</li>
+<li>En varios bloques temporales de datos (entrenamiento)</li>
+<li>y probar contra un bloque de prueba (validación)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd943a81">
+<h2 id="orgd943a81">Seleccionar el modelo entrenado</h2>
+<ul>
+<li>Probablemente haya miles de modelos en este punto</li>
+<li>¿Qué quieres usar para seleccionar?</li>
+<li>¿La métrica? ¿En que momento del tiempo?</li>
+<li>¿Estabilidad?</li>
+<li>¿Simpleza?</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org741e537">
+<h2 id="org741e537">Gobierno</h2>
+<ul>
+<li>Algunos piensan en gobierno de datos</li>
+<li>O en control de código</li>
+<li>Pero no es suficiente, debes de gobernar el linaje, los metadatos,
+la infraestructura, los modelos</li>
+<li>Por que quieres tener &#x2026;</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga0b4ace">
+<h2 id="orga0b4ace">Reproducibilidad</h2>
+<ul>
+<li>Y esto incluye poder reproducir:</li>
+<li>Resultados,  ¿Training datasets? ¿Trials? ¿/Features/? ¿Modelos? ¿Infraestructura?</li>
+<li>¿Cómo la evolución del producto de datos es almacenada en un
+formato que sea resilente a la pérdida de información?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb4c1410">
+<h2 id="orgb4c1410">La abstracción: <i>pipeline 3era parte</i></h2>
+<p>
+<code>raw</code> -&gt; <code>cleaned</code> -&gt; <code>semantic</code> -&gt; <code>labels</code> -&gt; <code>features</code> -&gt;
+<code>models</code> -&gt; <code>Model</code>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org19798fa">
+<h2 id="org19798fa">Otros puntos a considerar</h2>
+<div class="outline-text-2" id="text-org19798fa">
+</div>
+</section>
+<section id="slide-org9d3107c">
+<h3 id="org9d3107c">Procesos</h3>
+<ul>
+<li>¿Ya pensaste en como obtener los datos de manera contínua?</li>
+<li>Recuerda que inclusive tú eres un <i>adversario</i> cuando el producto
+llega a producción</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd406c43">
+<h3 id="orgd406c43">Métricas</h3>
+<ul>
+<li><i>Off line</i></li>
+<li><i>On line</i></li>
+<li><i>businness metrics</i></li>
+<li>Del proceso
+<ul>
+<li>e.g. Fraude fecha <i>contable</i> contra Fraude fecha <i>real</i></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgbc3dd80">
+<h3 id="orgbc3dd80">Consumo</h3>
+<ul>
+<li>¿La organización cuenta con las capacidades para adoptar el producto?</li>
+<li>¿El usuario final entiende? ¿Participó en el diseño?</li>
+<li>¿Cómo es la interacción del usuario y el producto?</li>
+<li>¿El producto está integrado al proceso del usuario?</li>
+<li>¿Cómo despliegas en producción el modelo?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org709e840">
+<h2 id="org709e840">Limitaciones de la Ciencia de Datos</h2>
+<ul>
+<li>Patrones de comportamientos pasados</li>
+<li>Ayuda a tomar decisiones sobre como actuar en un sistema complejo,
+pero, tradicionalmente <i>Machine Learning</i> sólo responde a preguntas simples</li>
+<li>Actualmente los modelos carecen de la habilidad de razonar acerca de
+las entidades y de las relaciones entre esas entidades</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org348d49e">
+<h2 id="org348d49e">Ciencia de datos para estrategia</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf025fd4">
+<h2 id="orgf025fd4">¿Preguntas?</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf9e09c7">
+<h2 id="orgf9e09c7">Conectando&#x2026;</h2>
+<p>
+Data Science for Social Good Summer Fellowship
+</p>
+
+<p>
+<a href="http://dssg.uchicago.edu">http://dssg.uchicago.edu</a>
+</p>
+
+<p>
+Center for Data Science &amp; Public Policy
+</p>
+
+<p>
+<a href="http://dsapp.uchicago.edu">http://dsapp.uchicago.edu</a>
+</p>
+
+<p>
+Code:
+</p>
+
+<p>
+<a href="http://github.com/dssg">http://github.com/dssg</a>
+</p>
+
+
+<p>
+Twitter: @nanounanue
+Github:   nanounanue
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

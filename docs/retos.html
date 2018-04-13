@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Implementación de Ciencia de datos en Organizaciones Públicas: Retos y algunas Soluciones</title>
+<meta name="author" content="(Adolfo De Unánue Tiscareño)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<section>
+<section id="slide-orgd9e96c7">
+<h2 id="orgd9e96c7">Implementación de Ciencia de datos en Organizaciones Públicas: Retos y algunas Soluciones</h2>
+<p>
+Adolfo De Unánue
+</p>
+
+<p>
+Center for Data Science and Public Poicy
+</p>
+
+<p>
+University of Chicago
+</p>
+
+<p>
+<b>Twitter</b>: <code>@nanounanue</code>
+<b>Github</b>:   <code>Nanounanue</code>
+</p>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org9bfbf8f">
+<h2 id="org9bfbf8f">¿Dónde encontrar la presentación?</h2>
+<ul>
+<li><code>nanounanue/talks/chile_2018</code></li>
+<li>El repositorio de github contiene el código de la charla
+e incluye la liga a la Presentación</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga16273f">
+<h2 id="orga16273f">Licencia</h2>
+<p>
+Este trabajo se encuentra bajo la Licencia 
+ de 
+</p>
+
+<p>
+<b>Creative Commons</b> 
+</p>
+
+<p>
+<b>Attribution ShareAlike 4.0</b>
+</p>
+
+<p>
+<b>International License.</b>
+</p>
+
+<p>
+Para ver una copia de esta licencia, Visita:
+<a href="http://creativecommons.org/license/by-sa/4.0/">http://creativecommons.org/license/by-sa/4.0/</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgbf15dd7">
+<h2 id="orgbf15dd7">Advertencia</h2>
+<ul>
+<li><i>Opinionado</i></li>
+<li>Esta plática es un <i>checklist</i> de cosas que deberían de ser obvias</li>
+<li>Casi no hablaré de tecnología o de matemáticas</li>
+<li>Pero si de la necesidad de estas siempre, pero más en la época actual</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga080d86">
+<h2 id="orga080d86">¿Qué es la ciencia de Datos?</h2>
+<div class="outline-text-2" id="text-orga080d86">
+</div>
+</section>
+<section id="slide-orgedb7622">
+<h3 id="orgedb7622">La definición más corta</h3>
+<blockquote nil>
+<p>
+<i>"Estadística operacionalizada"</i>
+</p>
+</blockquote>
+
+
+
+</section>
+<section id="slide-org0554f01">
+<h3 id="org0554f01">Mi definición</h3>
+<blockquote nil>
+<p>
+Aproximación fenomenológica al estudio de sistemas adaptativos
+complejos (CAS) con el propósito de diseñar y construir productos de
+datos que soporten la toma de decisiones y habiliten acciones
+valiosas en el sistema en cuestión.
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org98c83ec">
+<h2 id="org98c83ec">Productos de datos</h2>
+<ul>
+<li>Un <i>producto de datos</i> es un sistema (o agente) que contínuamente
+siente el ambiente, procesa los datos en información y proveé
+acciones o recomendaciones de acción.</li>
+
+<li>Es la <i>raison d'etre</i> del Científico de datos</li>
+
+<li>Forma un <i>feedback loop</i></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2b58e68">
+<h2 id="org2b58e68">¿Qué es un Modelo?</h2>
+<ul>
+<li>Quizá utilicen <b>modelo</b> y <b>algoritmo de ml</b> de manera intercambiable
+<ul>
+<li>e.g. "Hicimos/entrenamos un <code>RandomForest</code>"</li>
+
+</ul></li>
+
+</ul>
+
+<blockquote nil>
+<p>
+modelo != algoritmo
+</p>
+</blockquote>
+
+</section>
+<section id="slide-orgad260ca">
+<h3 id="orgad260ca">Un modelo es:</h3>
+<blockquote nil>
+<p>
+modelo &lt;- <i>Data lineage</i> (incluyendo la limpieza, transformación,
+extracción, etc) + el algoritmo + los hiperparámetros del algoritmo
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org8f443a7">
+<h3 id="org8f443a7">O siendo más riguroso</h3>
+<blockquote nil>
+<p>
+modelo &lt;- <i>Data lineage</i> (incluyendo la limpieza, transformación,
+extracción, etc) + <b>algoritmos</b> + hiperparámetros + estrategia de
+<i>cross-validation</i> + métricas + algoritmo de selección de hiperparámetros
+</p>
+</blockquote>
+
+<ul>
+<li>El modelo <b>no</b> es el paso final, es el conjunto de pasos.</li>
+
+<li>Un modelo tiene varias instancias en el tiempo 
+<ul>
+<li>En DSaPP llamamos a esto <i>model group</i></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org4072696">
+<h2 id="org4072696">Mascotas y Ganado: Dos puntos de Vista</h2>
+<div class="outline-text-2" id="text-org4072696">
+</div>
+</section>
+<section id="slide-org3270bf2">
+<h3 id="org3270bf2">Mascota</h3>
+
+<div class="figure">
+<p><img src="./images/simona.jpg" alt="simona.jpg" width="400px" height="300px" />
+</p>
+</div>
+
+<ul>
+<li>tiene nombre ( e.g. "Simona"), hay una o muy pocas por casa, se le
+consiente, hay tristeza/duelo si se Muere.</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org930a2da">
+<h3 id="org930a2da">Ganado</h3>
+<ul>
+<li>no tienen nombre (e.g."una vaca") , se administran, hay miles,
+se mandan al matadero.</li>
+
+<li>Para el científico de datos, los modelos son <i>ganado</i>.</li>
+
+</ul>
+
+
+
+<div class="figure">
+<p><img src="./images/ganado.jpeg" alt="ganado.jpeg" width="400px" height="300px" />
+</p>
+</div>
+
+<p>
+Foto: <a href="http://www.elcomercio.com/actualidad/ganado-importado-casa-abierta-ecuador.html">Juan Carlos Pérez/ EL COMERCIO.</a>
+</p>
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org827cc80">
+<h2 id="org827cc80">Limitaciones de la Ciencia de Datos</h2>
+<ul>
+<li>Patrones de comportamientos pasados</li>
+<li>Ayuda a tomar decisiones sobre como actuar en un sistema complejo,
+pero, tradicionalmente <i>Machine Learning</i> sólo responde a preguntas simples</li>
+<li>Actualmente los modelos carecen de la habilidad de razonar acerca de
+las entidades y de las relaciones entre esas entidades</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org9f27933">
+<h2 id="org9f27933">AI &isin; IA</h2>
+<ul>
+<li>Aumento de inteligencia</li>
+<li>Inteligencia artificial</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org539ce28">
+<h2 id="org539ce28">Un ejercicio de visualización</h2>
+<ul>
+<li>Piensa en tu organización</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd20757e">
+<h2 id="orgd20757e">¿Qué es una organización?</h2>
+<ul>
+<li><b>TOGAF</b> define a una empresa como:</li>
+
+</ul>
+
+<blockquote nil>
+<p>
+Empresa es cualquier colección de organizaciones que tiene un conjunto común de metas
+</p>
+</blockquote>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgcd8123c">
+<h2 id="orgcd8123c">Un concepto interesante: Variedad</h2>
+<p>
+<i>Ley de Ashby</i>: El controlador debe tener al menos la misma variedad que lo controlado
+</p>
+
+
+<div class="figure">
+<p><img src="./images/requisite_variety.jpg" alt="requisite_variety.jpg" width="600px" height="400px" />
+</p>
+</div>
+
+<p>
+Fuente: Stafford Beer
+</p>
+
+</section>
+<section >
+
+
+<div class="figure">
+<p><img src="./images/variedad.png" alt="variedad.png" width="400px" height="300px" />
+</p>
+</div>
+
+<p>
+<a href="http://www.athanassoulas.com/the-law-of-requisite-variety/">Fuente</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org96cfdda">
+<h2 id="org96cfdda">Otro concepto: <i>Feedback loop</i></h2>
+
+<div class="figure">
+<p><img src="./images/feedback_loop.gif" alt="feedback_loop.gif" width="400px" height="300px" />
+</p>
+</div>
+
+<p>
+<b>Fuente</b>: Sterman, J.D. Business Dynamics: Systems Thinking and Modeling for a Complex World. McGraw-Hill. Boston. 2000
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf209d5a">
+<h2 id="orgf209d5a">¿Cuál es el propósito de la Organización?</h2>
+<blockquote nil>
+<p>
+El propósito del sistema es lo que hace.
+</p>
+</blockquote>
+
+<p>
+Stafford Beer
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org8d2b6cd">
+<h2 id="org8d2b6cd">La situación</h2>
+<ul>
+<li>El producto de datos es un componente transversal a la arquitectura de la organización.</li>
+<li>Además, las acciones, tomadas o recomendadas, impactará en varias áreas de la organizaciónorganisation.
+<ul>
+<li><i>feedback loop</i></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org46487f2">
+<h2 id="org46487f2">Problema: Evolución</h2>
+<ul>
+<li>Las organizaciones se crearon originalmente para resolver un problema</li>
+<li>Sus sensores, sistemas y datos fueron diseñandos desde el punto de vista operacional</li>
+<li>Nadie estaba pensando en el futuro</li>
+<li>Es decir la organización tiene <i>historia</i></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb3b5703">
+<h2 id="orgb3b5703">Problema: Tecnología</h2>
+<ul>
+<li>Soportar a los procesos organizacionales</li>
+<li>Habilitar la evolución de la organización</li>
+<li>Ayudar a controlar la variabilidad</li>
+<li>Contrario a la creencia popular, no cambia tan rápido</li>
+<li>Es considerada como segunda categoría en muchas culturas</li>
+<li>Su rol entonces es <b>no</b> innovar, sino mantener el funcionamiento actual</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orge0c8f0d">
+<h2 id="orge0c8f0d">Problema: Procesos</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org2a60055">
+<h2 id="org2a60055">Problema: Implementación</h2>
+<ul>
+<li>Muchos siguen pensando en el estudio estadístico</li>
+<li>&#x2026; o el estudio econométrico</li>
+<li><i>ceteris paribus</i></li>
+<li>¿Las fuentes de datos son estables?</li>
+<li>¿Cómo comunicar los cambios en los generadores de datos?</li>
+<li>¿Se puede cerrar el <i>loop</i>?</li>
+<li>¿Qué implicaciones tendrá?</li>
+<li>¿Dónde se conectará?</li>
+<li>¿Quién lo mantendrá?</li>
+<li>¿Cómo afectará a los procesos?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org0ebc4ca">
+<h2 id="org0ebc4ca">Problema: Humanos</h2>
+<ul>
+<li>Las trampas cognitivas son ampliamente conocidas</li>
+<li>Pensamiento a corto plazo</li>
+<li>Dificultad para pensar en probabilidades</li>
+<li>Pensar linealmente en causa y efecto: Ignorar <i>feedbacks</i> and <i>delays</i></li>
+<li>Inercia / Resistencia al cambio</li>
+<li>Menospreciar la evidencia que no favorece su punto de vista</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgea063cc">
+<h2 id="orgea063cc">Problema: El modelador</h2>
+<ul>
+<li>Fetiche matemático</li>
+<li>Fetiche tecnológico</li>
+<li>No pensar en el servicios, pensar en <i>trends</i></li>
+<li>No considerar el sistema</li>
+<li>No considerar al humano final</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org21412a9">
+<h2 id="org21412a9">Otros problemas</h2>
+<ul>
+<li><i>bias</i></li>
+<li>interpretabilidad</li>
+<li>(des) confianza</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2261661">
+<h2 id="org2261661">Trampas conocidas</h2>
+<ul>
+<li><i>dashboard</i> y el tiempo Real</li>
+<li>el modelo único</li>
+<li>el "piloto"</li>
+<li>ignorar el sistema</li>
+<li>ignorar las impactos</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbc40eac">
+<h2 id="orgbc40eac">¿Cómo resolverlos?</h2>
+<ul>
+<li>Sistemas</li>
+<li>Visión <i>en large</i></li>
+<li>Estratégica</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org467f0e3">
+<h2 id="org467f0e3">A manera de Conclusión</h2>
+<ul>
+<li>Los <b>productos de datos</b>:
+<ul>
+<li>Absorben variedad de entrada</li>
+<li>Amplifican la variedad de salida</li>
+<li>Bien construidos, aumentan la adaptabilidad de la organización</li>
+<li>Aumentan la <i>viabilidad</i></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8115b82">
+<h2 id="org8115b82">Ciencia de datos para estrategia</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orga9ad534">
+<h2 id="orga9ad534">¿Preguntas?</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org5d64c43">
+<h2 id="org5d64c43">Conectando&#x2026;</h2>
+<p>
+Data Science for Social Good Summer Fellowship
+</p>
+
+<p>
+<a href="http://dssg.uchicago.edu">http://dssg.uchicago.edu</a>
+</p>
+
+<p>
+Center for Data Science &amp; Public Policy
+</p>
+
+<p>
+<a href="http://dsapp.uchicago.edu">http://dsapp.uchicago.edu</a>
+</p>
+
+<p>
+Code:
+</p>
+
+<p>
+<a href="http://github.com/dssg">http://github.com/dssg</a>
+</p>
+
+
+<p>
+Twitter: @nanounanue
+Github:   nanounanue
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
