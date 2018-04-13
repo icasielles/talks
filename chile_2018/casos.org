@@ -18,8 +18,8 @@
   
   University of Chicago
 
-*Twitter*: =@nanounanue=
-*Github*:   =Nanounanue=
+*Twitter*: =@nano_unanue=
+*Github*:   =nanounanue=
 
   
 * ¿Dónde encontrar la presentación?
@@ -427,6 +427,6 @@ Code:
 http://github.com/dssg
 
 
-Twitter: @nanounanue
-Github:   nanounanue
+Twitter: =@nano_unanue=
+Github:   =nanounanue=
 

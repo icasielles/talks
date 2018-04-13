@@ -17,7 +17,7 @@
   
   University of Chicago
 
-*Twitter*: =@nanounanue=
+*Twitter*: =@nano_unanue=
 *Github*:   =Nanounanue=
 
 
@@ -307,8 +307,8 @@ Code:
 http://github.com/dssg
 
 
-Twitter: @nanounanue
-Github:   nanounanue
+Twitter: =@nano_unanue=
+Github:   =nanounanue=
 
 
 
